@@ -9,8 +9,10 @@ import { dataValidator, queryValidator } from '../../validators'
 // Main data model schema
 export const questionSchema = Type.Object(
   {
-    id: Type.Number(),
-    text: Type.String()
+    id: Type.String(),
+    text: Type.String(),
+    parentQuestionId: Type.Optional(Type.String()),
+    categoryId: Type.String()
   },
   { $id: 'Question', additionalProperties: false }
 )

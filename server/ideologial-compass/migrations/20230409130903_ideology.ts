@@ -3,9 +3,13 @@ import type { Knex } from 'knex'
 
 export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable('ideology', (table) => {
-    table.increments('id')
+    table.string('id')
 
-    table.string('text')
+    table.string('name')
+
+    table.string('description')
+    
+    table.text('referenceLinks') // json array of strings
   })
 }
 

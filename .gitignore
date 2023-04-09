@@ -145,3 +145,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+server/ideologial-compass/ideologial-compass.sqlite

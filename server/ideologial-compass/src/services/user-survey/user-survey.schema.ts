@@ -9,8 +9,15 @@ import { dataValidator, queryValidator } from '../../validators'
 // Main data model schema
 export const userSurveySchema = Type.Object(
   {
-    id: Type.Number(),
-    text: Type.String()
+    id: Type.String(),
+    userId: Type.String(),
+    createdAt: Type.Date(),
+    closestMatchIdeologyId: Type.String(),
+    questionsAndAnswers: Type.Array(Type.Object({
+      priority: Type.Number(),
+      questionId: Type.String(),
+      userAnswerId: Type.String()
+    }))
   },
   { $id: 'UserSurvey', additionalProperties: false }
 )
@@ -21,7 +28,7 @@ export const userSurveyResolver = resolve<UserSurvey, HookContext>({})
 export const userSurveyExternalResolver = resolve<UserSurvey, HookContext>({})
 
 // Schema for creating new entries
-export const userSurveyDataSchema = Type.Pick(userSurveySchema, ['text'], {
+export const userSurveyDataSchema = Type.Pick(userSurveySchema, ['closestMatchIdeologyId'], {
   $id: 'UserSurveyData'
 })
 export type UserSurveyData = Static<typeof userSurveyDataSchema>
@@ -37,7 +44,7 @@ export const userSurveyPatchValidator = getValidator(userSurveyPatchSchema, data
 export const userSurveyPatchResolver = resolve<UserSurvey, HookContext>({})
 
 // Schema for allowed query properties
-export const userSurveyQueryProperties = Type.Pick(userSurveySchema, ['id', 'text'])
+export const userSurveyQueryProperties = Type.Pick(userSurveySchema, ['id', 'closestMatchIdeologyId'])
 export const userSurveyQuerySchema = Type.Intersect(
   [
     querySyntax(userSurveyQueryProperties),

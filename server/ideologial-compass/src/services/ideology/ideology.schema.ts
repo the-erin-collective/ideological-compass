@@ -9,8 +9,10 @@ import { dataValidator, queryValidator } from '../../validators'
 // Main data model schema
 export const ideologySchema = Type.Object(
   {
-    id: Type.Number(),
-    text: Type.String()
+    id: Type.String(),
+    name: Type.String(),
+    referenceLinks: Type.Array(Type.String()),
+    description: Type.String()
   },
   { $id: 'Ideology', additionalProperties: false }
 )
@@ -21,7 +23,7 @@ export const ideologyResolver = resolve<Ideology, HookContext>({})
 export const ideologyExternalResolver = resolve<Ideology, HookContext>({})
 
 // Schema for creating new entries
-export const ideologyDataSchema = Type.Pick(ideologySchema, ['text'], {
+export const ideologyDataSchema = Type.Pick(ideologySchema, ['name'], {
   $id: 'IdeologyData'
 })
 export type IdeologyData = Static<typeof ideologyDataSchema>
@@ -37,7 +39,7 @@ export const ideologyPatchValidator = getValidator(ideologyPatchSchema, dataVali
 export const ideologyPatchResolver = resolve<Ideology, HookContext>({})
 
 // Schema for allowed query properties
-export const ideologyQueryProperties = Type.Pick(ideologySchema, ['id', 'text'])
+export const ideologyQueryProperties = Type.Pick(ideologySchema, ['id', 'name'])
 export const ideologyQuerySchema = Type.Intersect(
   [
     querySyntax(ideologyQueryProperties),

@@ -3,9 +3,9 @@ import type { Knex } from 'knex'
 
 export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable('survey', (table) => {
-    table.increments('id')
+    table.string('id')
 
-    table.string('text')
+    table.text('rootQuestions') // json array of {questionId: string, priority:number} 
   })
 }
 
