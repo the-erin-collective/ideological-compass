@@ -4,6 +4,49 @@ import type { TransportConnection, Application } from '@feathersjs/feathers'
 import authenticationClient from '@feathersjs/authentication-client'
 import type { AuthenticationClientOptions } from '@feathersjs/authentication-client'
 
+import { ideologyAnswerClient } from './services/ideology-answer/ideology-answer.shared'
+export type {
+  IdeologyAnswer,
+  IdeologyAnswerData,
+  IdeologyAnswerQuery,
+  IdeologyAnswerPatch
+} from './services/ideology-answer/ideology-answer.shared'
+
+import { ideologyClient } from './services/ideology/ideology.shared'
+export type {
+  Ideology,
+  IdeologyData,
+  IdeologyQuery,
+  IdeologyPatch
+} from './services/ideology/ideology.shared'
+
+import { surveyClient } from './services/survey/survey.shared'
+export type { Survey, SurveyData, SurveyQuery, SurveyPatch } from './services/survey/survey.shared'
+
+import { questionCategoryClient } from './services/question-category/question-category.shared'
+export type {
+  QuestionCategory,
+  QuestionCategoryData,
+  QuestionCategoryQuery,
+  QuestionCategoryPatch
+} from './services/question-category/question-category.shared'
+
+import { questionClient } from './services/question/question.shared'
+export type {
+  Question,
+  QuestionData,
+  QuestionQuery,
+  QuestionPatch
+} from './services/question/question.shared'
+
+import { userSurveyClient } from './services/user-survey/user-survey.shared'
+export type {
+  UserSurvey,
+  UserSurveyData,
+  UserSurveyQuery,
+  UserSurveyPatch
+} from './services/user-survey/user-survey.shared'
+
 import { userClient } from './services/users/users.shared'
 export type { User, UserData, UserQuery, UserPatch } from './services/users/users.shared'
 
@@ -34,5 +77,11 @@ export const createClient = <Configuration = any>(
   client.set('connection', connection)
 
   client.configure(userClient)
+  client.configure(userSurveyClient)
+  client.configure(questionClient)
+  client.configure(questionCategoryClient)
+  client.configure(surveyClient)
+  client.configure(ideologyClient)
+  client.configure(ideologyAnswerClient)
   return client
 }
