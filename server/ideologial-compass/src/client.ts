@@ -4,6 +4,22 @@ import type { TransportConnection, Application } from '@feathersjs/feathers'
 import authenticationClient from '@feathersjs/authentication-client'
 import type { AuthenticationClientOptions } from '@feathersjs/authentication-client'
 
+import { categoryClient } from './services/category/category.shared'
+export type {
+  Category,
+  CategoryData,
+  CategoryQuery,
+  CategoryPatch
+} from './services/category/category.shared'
+
+import { userAnswerClient } from './services/user-answer/user-answer.shared'
+export type {
+  UserAnswer,
+  UserAnswerData,
+  UserAnswerQuery,
+  UserAnswerPatch
+} from './services/user-answer/user-answer.shared'
+
 import { ideologyAnswerClient } from './services/ideology-answer/ideology-answer.shared'
 export type {
   IdeologyAnswer,
@@ -22,14 +38,6 @@ export type {
 
 import { surveyClient } from './services/survey/survey.shared'
 export type { Survey, SurveyData, SurveyQuery, SurveyPatch } from './services/survey/survey.shared'
-
-import { questionCategoryClient } from './services/question-category/question-category.shared'
-export type {
-  QuestionCategory,
-  QuestionCategoryData,
-  QuestionCategoryQuery,
-  QuestionCategoryPatch
-} from './services/question-category/question-category.shared'
 
 import { questionClient } from './services/question/question.shared'
 export type {
@@ -77,11 +85,12 @@ export const createClient = <Configuration = any>(
   client.set('connection', connection)
 
   client.configure(userClient)
-  client.configure(userSurveyClient)
   client.configure(questionClient)
-  client.configure(questionCategoryClient)
   client.configure(surveyClient)
   client.configure(ideologyClient)
   client.configure(ideologyAnswerClient)
+  client.configure(userAnswerClient)
+  client.configure(userSurveyClient)
+  client.configure(categoryClient)
   return client
 }

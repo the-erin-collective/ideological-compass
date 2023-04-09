@@ -9,8 +9,12 @@ import { dataValidator, queryValidator } from '../../validators'
 // Main data model schema
 export const surveySchema = Type.Object(
   {
-    id: Type.Number(),
-    text: Type.String()
+    id: Type.String(),
+    rootQuestions: Type.Array(Type.Object({  
+          questionId: Type.String(),  
+          priority: Type.Number()   
+        })
+       )    
   },
   { $id: 'Survey', additionalProperties: false }
 )
@@ -21,7 +25,7 @@ export const surveyResolver = resolve<Survey, HookContext>({})
 export const surveyExternalResolver = resolve<Survey, HookContext>({})
 
 // Schema for creating new entries
-export const surveyDataSchema = Type.Pick(surveySchema, ['text'], {
+export const surveyDataSchema = Type.Pick(surveySchema, ['rootQuestions'], {
   $id: 'SurveyData'
 })
 export type SurveyData = Static<typeof surveyDataSchema>
@@ -37,7 +41,7 @@ export const surveyPatchValidator = getValidator(surveyPatchSchema, dataValidato
 export const surveyPatchResolver = resolve<Survey, HookContext>({})
 
 // Schema for allowed query properties
-export const surveyQueryProperties = Type.Pick(surveySchema, ['id', 'text'])
+export const surveyQueryProperties = Type.Pick(surveySchema, ['id', 'rootQuestions'])
 export const surveyQuerySchema = Type.Intersect(
   [
     querySyntax(surveyQueryProperties),

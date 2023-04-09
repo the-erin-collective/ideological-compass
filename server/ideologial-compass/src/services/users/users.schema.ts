@@ -9,12 +9,13 @@ import { dataValidator, queryValidator } from '../../validators'
 // Main data model schema
 export const userSchema = Type.Object(
   {
-    id: Type.Number(),
+    id: Type.String(),
     googleId: Type.Optional(Type.String()),
     facebookId: Type.Optional(Type.String()),
     twitterId: Type.Optional(Type.String()),
     githubId: Type.Optional(Type.String()),
-    auth0Id: Type.Optional(Type.String())
+    auth0Id: Type.Optional(Type.String()),
+    email: Type.Optional(Type.String())
   },
   { $id: 'User', additionalProperties: false }
 )

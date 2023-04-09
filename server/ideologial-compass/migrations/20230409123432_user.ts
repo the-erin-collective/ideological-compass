@@ -3,7 +3,7 @@ import type { Knex } from 'knex'
 
 export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable('users', (table) => {
-    table.increments('id')
+    table.string('id')
 
     table.string('googleId')
 
@@ -14,6 +14,8 @@ export async function up(knex: Knex): Promise<void> {
     table.string('githubId')
 
     table.string('auth0Id')
+    
+    table.string('email').nullable()
   })
 }
 
