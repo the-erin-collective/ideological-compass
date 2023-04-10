@@ -57,6 +57,7 @@
     "@feathersjs/schema": "^5.0.3",
     "@feathersjs/transport-commons": "^5.0.3",
     "@feathersjs/typebox": "^5.0.3",
+    "guid-typescript": "^1.0.9",
     "knex": "^2.4.2",
     "sqlite3": "^5.1.6",
     "winston": "^3.8.2"
