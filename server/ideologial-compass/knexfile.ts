@@ -4,4 +4,16 @@ import { app } from './src/app'
 // Load our database connection info from the app configuration
 const config = app.get('sqlite')
 
-module.exports = config
+const seedsConfig = {
+    seeds: {
+      directory: './seeds',
+    },
+  };
+  
+// Merge seeds configuration with existing config
+const knexConfig = {
+    ...config,
+    ...seedsConfig,
+};
+  
+module.exports = knexConfig
